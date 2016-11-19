@@ -1,0 +1,36 @@
+---
+---
+@import "minima";
+
+.trigger {
+	#exercise_nav { text-decoration:none; color:black;}
+	#exercise_nav:after {content:' ▼'}
+	ul { 
+		margin: 0;
+		display:inline-block;
+		line-height:normal;
+		list-style-type: none;
+		ul { 
+			display: none;
+			position: fixed;
+			li { display: block; padding:5px;}
+		}
+	}
+	li:hover > ul { 
+		background-color:white;
+		display: block;
+		list-style-position:inside;
+        margin:0;
+        padding:0;
+
+        li:first-child { padding-top:15px;}
+    }
+}
+
+footer { text-align:center;}
+.icon--blog { font-variant:small-caps;}
+#footer-description { float:left; margin-right:5px;}
+.social-media-list {
+	float:left;
+	li { display:inline;}
+}
