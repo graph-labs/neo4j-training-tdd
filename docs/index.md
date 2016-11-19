@@ -68,4 +68,5 @@ Notez enfin que la solution la plus simple est souvent la meilleure ;-)
 ## Énoncés
 
  1. ["Échauffement"](./basics/)
+ 1. ["API unitaires"](./core_api/)
 
