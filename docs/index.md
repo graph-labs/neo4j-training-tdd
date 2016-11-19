@@ -70,4 +70,3 @@ Soyez curieux ! Explorez les API de Neo4j, elles vous donneront
 la réponse que vous cherchez. (L'autocomplétion de l'IDE aide beaucoup.)
 
 Notez enfin que la solution la plus simple est souvent la meilleure ;-)
-
