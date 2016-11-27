@@ -71,4 +71,5 @@ Notez enfin que la solution la plus simple est souvent la meilleure ;-)
  1. ["API unitaires"](./core_api/)
  1. ["Traversées"](./traversal/)
  1. ["Cypher en lecture"](./cypher_reading/)
+ 1. ["Cypher en écriture"](./cypher_writing/)
 
