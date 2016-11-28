@@ -35,11 +35,7 @@ public class _2_RelationshipWriteTest extends GraphTests {
         try (Transaction transaction = graphDb.beginTx()) {
             Node elaine = graphDb.getNodeById(elaineInternalId); // DON'T DO THIS IN REAL CODE
             Node guybrush = graphDb.getNodeById(guybrushInternalId); // DON'T DO THIS IN REAL CODE
-            /*
-             * TODO: create the relationship between Guybrush and Elaine
-             * BONUS: try the reverse way as well!
-             */
-            fail("You should create a relationship between the two nodes");
+            guybrush.createRelationshipTo(elaine, RelationshipType.withName("LOVES"));
             transaction.success();
         }
 
@@ -67,8 +63,13 @@ public class _2_RelationshipWriteTest extends GraphTests {
         }
 
         try (Transaction transaction = graphDb.beginTx()) {
-            // TODO: create the relationship with properties between Guybrush and Chuck
-            fail("You should create a relationship with properties between the two nodes");
+            Node guybrush = graphDb.getNodeById(guybrushInternalId);
+            Node chuck = graphDb.getNodeById(chuckInternalId);
+
+            Relationship relationship = guybrush
+                .createRelationshipTo(chuck, RelationshipType.withName("HATES"));
+            relationship.setProperty("reason", "Both Guybrush and LeChuck love Elaine");
+            relationship.setProperty("level", "Extreme");
             transaction.success();
         }
 
@@ -87,8 +88,10 @@ public class _2_RelationshipWriteTest extends GraphTests {
     @Test
     public void should_create_relationship_between_two_new_nodes() {
         try (Transaction transaction = graphDb.beginTx()) {
-            // TODO: create two nodes and a relationship between them, within the same transaction
-            fail("You should create a relationship between two new nodes");
+            Node character1 = graphDb.createNode(Label.label("Character"));
+            Node character2 = graphDb.createNode(Label.label("Character"));
+            Relationship relationship = character1.createRelationshipTo(character2, RelationshipType.withName("FIGHTS"));
+            relationship.setProperty("fight_type", "Insult sword fighting");
             transaction.success();
         }
 
@@ -131,8 +134,7 @@ public class _2_RelationshipWriteTest extends GraphTests {
 
         try (Transaction transaction = graphDb.beginTx()) {
             Relationship singleRelationship = graphOperations.getSingleRelationship();
-            // TODO: overwrite the property
-            fail("You should overwrite the relationship property");
+            singleRelationship.setProperty("message", "Hello world");
             transaction.success();
         }
 
@@ -154,8 +156,7 @@ public class _2_RelationshipWriteTest extends GraphTests {
 
         try (Transaction transaction = graphDb.beginTx()) {
             Relationship singleRelationship = graphOperations.getSingleRelationship();
-            //TODO: remove the relationship
-            fail("You should remove the relationship");
+            singleRelationship.delete();
             transaction.success();
         }
 

@@ -35,8 +35,7 @@ public class _3_GraphReadTest extends GraphTests {
     @Test
     public void should_find_all_character_nodes() {
         try (Transaction ignored = graphDb.beginTx()) {
-            Iterator<Node> allNodes = null; /*TODO: find all nodes*/
-            fail("You should find all nodes");
+            Iterator<Node> allNodes = graphDb.findNodes(Label.label("Character"));
 
             assertThat(allNodes)
                 .hasSize(4)
@@ -48,8 +47,7 @@ public class _3_GraphReadTest extends GraphTests {
     @Test
     public void should_find_all_heroes() {
         try (Transaction ignored = graphDb.beginTx()) {
-            Iterator<Node> allNodes = null/*TODO: find all heroes*/;
-            fail("You should find all heroes");
+            Iterator<Node> allNodes = graphDb.findNodes(Label.label("Hero"));
 
             assertThat(allNodes)
                 .hasSize(2)
@@ -61,8 +59,7 @@ public class _3_GraphReadTest extends GraphTests {
     @Test
     public void should_find_all_villains() {
         try (Transaction ignored = graphDb.beginTx()) {
-            Iterator<Node> allNodes = null/*TODO: find all villains*/;
-            fail("You should find all villains");
+            Iterator<Node> allNodes = graphDb.findNodes(Label.label("Villain"));
 
             assertThat(allNodes)
                 .hasSize(2)
@@ -74,8 +71,7 @@ public class _3_GraphReadTest extends GraphTests {
     @Test
     public void should_find_all_relationship_types() {
         try (Transaction ignored = graphDb.beginTx()) {
-            Iterable<RelationshipType> allRelationships = null/*TODO: find all relationships*/;
-            fail("You should find all relationships");
+            Iterable<RelationshipType> allRelationships = graphDb.getAllRelationshipTypesInUse();
 
             assertThat(allRelationships)
                 .hasSize(4)
@@ -87,8 +83,7 @@ public class _3_GraphReadTest extends GraphTests {
     @Test
     public void should_find_largo_by_label_and_property() {
         try (Transaction ignored = graphDb.beginTx()) {
-            Node largo = null/*TODO: find Largo LaGrande node*/;
-            fail("You should find a Largo LaGrande node");
+            Node largo = graphDb.findNode(Label.label("Character"), "name", "Largo LaGrande");
 
             assertThat(largo.getLabels())
                 .extracting(Label::name)
@@ -107,8 +102,7 @@ public class _3_GraphReadTest extends GraphTests {
     @Test
     public void should_find_characters_appearing_in_first_opus() {
         try (Transaction ignored = graphDb.beginTx()) {
-            Iterator<Node> firstOpusCharacters = null/*TODO: find all first opus character nodes*/;
-            fail("You should find all character nodes appearing in the first opus");
+            Iterator<Node> firstOpusCharacters = graphDb.findNodes(Label.label("Character"), "in_first_opus", true);
 
             assertThat(firstOpusCharacters)
                 .extracting(node -> (String) node.getProperty("name"))
