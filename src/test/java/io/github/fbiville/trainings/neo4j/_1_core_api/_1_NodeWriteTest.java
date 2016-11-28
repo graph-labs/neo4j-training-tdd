@@ -19,8 +19,7 @@ public class _1_NodeWriteTest extends GraphTests {
     public void writes_simple_node() {
         // every operation must be surrounded by a transaction
         try (Transaction transaction = graphDb.beginTx()) {
-            // TODO: remove the fail call line and call "graph.createNode();"
-            fail("You should create a simple node");
+            graphDb.createNode();
             transaction.success(); // commit transaction so that data is created on disk
         }
 
@@ -40,12 +39,7 @@ public class _1_NodeWriteTest extends GraphTests {
     @Test
     public void writes_node_with_a_single_label() {
         try (Transaction transaction = graphDb.beginTx()) {
-            /*
-             * TODO: remove the fail call and invoke the node creation method with a label
-             * BONUS: is there a second way to add a label to a node?
-             * HINT: you can create a label via Label.label method
-             */
-            fail("You should create a node with a single label");
+            graphDb.createNode(Label.label("Video game"));
             transaction.success();
         }
 
@@ -60,8 +54,7 @@ public class _1_NodeWriteTest extends GraphTests {
     @Test
     public void writes_node_with_several_labels() {
         try (Transaction transaction = graphDb.beginTx()) {
-             // TODO: remove the fail call and invoke the node creation method with several labels
-            fail("You should create a node with several label");
+            graphDb.createNode(Label.label("Video game"), Label.label("Adventure"));
             transaction.success();
         }
 
@@ -78,9 +71,9 @@ public class _1_NodeWriteTest extends GraphTests {
     @Test
     public void writes_node_with_properties() {
         try (Transaction transaction = graphDb.beginTx()) {
-             // TODO: remove the fail call and set properties to the node variable
             Node node = graphDb.createNode();
-            fail("You should add several properties to the node");
+            node.setProperty("title", "Monkey Island");
+            node.setProperty("price_in_EUR", 50);
             transaction.success();
         }
 
@@ -98,8 +91,9 @@ public class _1_NodeWriteTest extends GraphTests {
     @Test
     public void writes_node_with_several_labels_and_properties() {
         try (Transaction transaction = graphDb.beginTx()) {
-             // TODO: remove the fail call and create a node with several labels and properties
-            fail("You should create a node and add several properties and labels to it");
+            Node node = graphDb.createNode(Label.label("Character"), Label.label("Pirate"));
+            node.setProperty("name", "Guybrush Threepwood");
+            node.setProperty("age", 42);
             transaction.success();
         }
 
@@ -125,8 +119,7 @@ public class _1_NodeWriteTest extends GraphTests {
 
         try (Transaction transaction = graphDb.beginTx()) {
             Node node = graphOperations.getSingleNode();
-            // TODO: remove the fail assertion and delete the node
-            fail("You should delete the node");
+            node.delete();
 
             transaction.success();
         }
@@ -157,8 +150,7 @@ public class _1_NodeWriteTest extends GraphTests {
 
         try (Transaction transaction = graphDb.beginTx()) {
             Node largo = graphOperations.getSingleNode();
-            // TODO: remove the fail assertion and delete the node property
-            fail("You should remove the node property");
+            largo.removeProperty("height");
 
             transaction.success();
         }
