@@ -21,8 +21,7 @@ public class BasicsTest {
 
     @Test
     public void should_perform_addition() {
-        int five = 2 + 2; // TODO: remove the fail call and change this
-        fail("You should fix the addition");
+        int five = 2 + 3;
 
         // please do not change the assertion, it describes the desired result is!
         assertThat(five).isEqualTo(5);
@@ -30,8 +29,7 @@ public class BasicsTest {
 
     @Test
     public void should_contain_all_specified_numbers() {
-        List<Integer> ints = Arrays.asList(2, 1 /* TODO: remove the fail call and change this */);
-        fail("You should fix the array declaration");
+        List<Integer> ints = Arrays.asList(1,2,3);
 
         // please do not change the assertion, it describes the desired result is!
         assertThat(ints).containsExactly(1, 2, 3);
@@ -41,8 +39,7 @@ public class BasicsTest {
     public void should_extract_all_first_names() {
         List<Person> persons = Arrays.asList(
             new Person("Peter", "Neubauer"),
-            new Person("Emile", "Eifrem") /*TODO: fix first name*/);
-        fail("You should fix the array declaration");
+            new Person("Emil", "Eifrem"));
 
         // please do not change the assertion, it describes the desired result is!
         assertThat(persons)
@@ -54,7 +51,7 @@ public class BasicsTest {
     public void should_fail_dividing_by_zero() {
         thrown.expect(ArithmeticException.class);
 
-        int denominator = 2; //TODO: change it
+        int denominator = 0;
         double ignored = 1 / denominator;
         // do not remove this fail call
         fail("You should change the denominator to trigger the expected failure");
