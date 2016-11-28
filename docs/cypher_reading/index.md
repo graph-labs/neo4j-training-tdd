@@ -8,6 +8,7 @@ Retour à l'[accueil](..).
  1. ["API unitaires"](../core_api/)
  1. ["Traversées"](../traversal/)
  1. ["Cypher en écriture"](../cypher_writing/)
+ 1. ["API REST"](../rest/)
  
 ## Cypher en lecture
 
