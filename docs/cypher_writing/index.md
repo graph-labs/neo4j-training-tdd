@@ -10,6 +10,7 @@ Retour à l'[accueil](..).
  1. ["Cypher en lecture"](../cypher_reading/)
  1. ["API REST"](../rest/)
  1. ["Bolt"](../bolt/)
+ 1. ["Extensions Neo4j"](../extensions/)
  
 ## Cypher en écriture
 
