@@ -9,14 +9,14 @@ Retour à l'[accueil](..).
  1. ["Traversées"](../traversal/)
  1. ["Cypher en lecture"](../cypher_reading/)
  1. ["Cypher en écriture"](../cypher_writing/)
- 1. ["Bolt"](../bolt/)
+ 1. ["API REST"](../rest/)
  
-## API REST
+## Bolt
 
-Cette série d'exercices va dépendre de l'instance Neo4j que vous avez installée
-sur votre machine. Par conséquent, il est nécessaire d'importer les données
-Doctor Who afin que les tests puissent s'exécuter et de laisser votre instance 
-Neo4j active.
+À l'instar de la série d'exercice sur les API REST, cette série d'exercices sur Bolt 
+va dépendre de l'instance Neo4j que vous avez installée sur votre machine. 
+Par conséquent, il est nécessaire d'importer les données Doctor Who afin que les tests 
+puissent s'exécuter et de laisser votre instance Neo4j active.
 
 ### Import
 
