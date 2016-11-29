@@ -21,8 +21,8 @@ public class _4_CypherPathTest extends GraphTests {
     @Test
     public void should_find_how_many_regenerations_between_tom_baker_and_christopher_eccleston() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find how many regenerations happened between Tom Baker and Christopher Eccleston");
+            String cql = "MATCH path=(:Actor {actor:'Tom Baker'})-[:REGENERATED_TO*]->(:Actor {actor:'Christopher Eccleston'})" +
+                    "RETURN LENGTH(path) AS regenerations";
 
             Result result = graphDb.execute(cql);
 
@@ -33,8 +33,12 @@ public class _4_CypherPathTest extends GraphTests {
     @Test
     public void should_find_the_longest_continuous_story_arc_with_the_master() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the longest series of successive episodes where Master character plays");
+            String cql =
+                    "MATCH (master:Character {character:'Master'})-[:APPEARED_IN]->(first:Episode), arcs = (first)-[:NEXT*]->() " +
+                    "WHERE ALL(ep IN nodes(arcs) WHERE (master)-[:APPEARED_IN]->(ep)) " +
+                    "RETURN LENGTH(arcs) AS noOfPathHops " +
+                    "ORDER BY noOfPathHops DESC " +
+                    "LIMIT 1";
 
             Result result = graphDb.execute(cql);
 
@@ -46,8 +50,9 @@ public class _4_CypherPathTest extends GraphTests {
     @Test
     public void should_find_length_of_the_shortest_path_between_sarah_jane_smith_and_skaro() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should the length of the shortest path between Sarah Jane Smith and planet Skaro");
+            String cql =
+                    "MATCH path=shortestPath((sarah:Character {character:'Sarah Jane Smith'})-[*]-(skaro:Planet {planet: 'Skaro'})) " +
+                    "RETURN LENGTH(path) AS length";
 
             Result result = graphDb.execute(cql);
 

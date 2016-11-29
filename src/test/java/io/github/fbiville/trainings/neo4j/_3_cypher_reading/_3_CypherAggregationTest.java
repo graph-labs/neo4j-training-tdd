@@ -24,7 +24,6 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.assertj.core.util.Maps.newHashMap;
 
 public class _3_CypherAggregationTest extends GraphTests {
@@ -37,8 +36,7 @@ public class _3_CypherAggregationTest extends GraphTests {
     @Test
     public void should_count_the_number_of_actors_known_to_have_played_the_doctor() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should count the number of actors that played Doctor Who");
+            String cql = "MATCH (a:Actor)-[:PLAYED]->(:Character {character:'Doctor'}) RETURN COUNT(a) AS numberOfActorsWhoPlayedTheDoctor";
 
             Result result = graphDb.execute(cql);
 
@@ -49,8 +47,8 @@ public class _3_CypherAggregationTest extends GraphTests {
     @Test
     public void should_find_earliest_and_latest_regeneration_years() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the earliest and the latest regeneration years of Doctor Who");
+            String cql = "MATCH ()-[r:REGENERATED_TO]->() " +
+                    "RETURN MIN(r.year) AS earliest, MAX(r.year) AS latest";
 
             Result result = graphDb.execute(cql);
 
@@ -66,8 +64,8 @@ public class _3_CypherAggregationTest extends GraphTests {
     public void should_find_the_earliest_episode_where_freema_agyeman_and_david_tennant_worked_together() {
         // HINT: you will need to convert the result type in Cypher
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the earliest episode in which Freema Agyeman and David Tennant appeared");
+            String cql = "MATCH (:Actor {actor:'David Tennant'})-[:APPEARED_IN]->(e:Episode)<-[:APPEARED_IN]-()<-[:PLAYED]-(:Actor {actor:'Freema Agyeman'}) " +
+                    "RETURN MIN(TOINT(e.episode)) AS earliest";
 
             Result result = graphDb.execute(cql);
 
@@ -79,9 +77,8 @@ public class _3_CypherAggregationTest extends GraphTests {
     public void should_find_average_salary_of_actors_who_played_the_doctor() {
         // HINT: ignore the actors without salaries
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the average salary of Doctor Who actors");
-
+            String cql = "MATCH (a:Actor)-[:PLAYED]->(:Character {character:'Doctor'}) " +
+                    "RETURN AVG(a.salary) AS cash";
             Result result = graphDb.execute(cql);
 
             assertThat(result).containsOnly(newHashMap("cash", 600000.0));
@@ -91,8 +88,11 @@ public class _3_CypherAggregationTest extends GraphTests {
     @Test
     public void should_list_the_enemy_species_and_enemy_characters_for_each_episode_featuring_peter_davison_ordered_in_chronological_order() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the enemy species and enemy characters for each episode featuring Peter Davison");
+            String cql =
+                    "MATCH (:Actor {actor:'Peter Davison'})-[:APPEARED_IN]->(episode:Episode), " +
+                    "(episode)<-[:APPEARED_IN]-(e)-[:ENEMY_OF]->(:Character {character:'Doctor'}) " +
+                    "RETURN episode.episode, episode.title, COLLECT(e.species) AS species, COLLECT(e.character) AS characters " +
+                    "ORDER BY episode.episode";
 
             Result result = graphDb.execute(cql);
 
@@ -124,8 +124,10 @@ public class _3_CypherAggregationTest extends GraphTests {
     @Test
     public void should_find_the_enemy_species_that_rose_tyler_fought() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the enemy species that Rose Tyler fought");
+            String cql =
+                    "MATCH (rose:Character {character:'Rose Tyler'})-[:APPEARED_IN]->(ep:Episode)," +
+                    "(:Character {character:'Doctor'})-[:ENEMY_OF]->(enemy:Species)-[:APPEARED_IN]->(ep) " +
+                    "RETURN DISTINCT enemy.species AS enemySpecies";
 
             ResourceIterator<String> result = graphDb.execute(cql).columnAs("enemySpecies");
 
@@ -146,14 +148,18 @@ public class _3_CypherAggregationTest extends GraphTests {
              * HINT: you must find the original prop and its related part
              * that appear in the most episodes involving Dalek
              */
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the prop and its related part that appear the most in episodes with Dalek");
+            String cql =
+                    "MATCH (daleks:Species {species: \"Dalek\"})-[:APPEARED_IN]->(episode:Episode)<-[:USED_IN]-(:Props)" +
+                    "<-[:MEMBER_OF]-(:Prop)-[:COMPOSED_OF]->(part:Part)-[:ORIGINAL_PROP]->(originalprop:Prop) " +
+                    "RETURN originalprop.prop, part.part, count(DISTINCT episode) AS episode_count " +
+                    "ORDER BY episode_count " +
+                    "DESC LIMIT 1";
 
             Result result = graphDb.execute(cql);
 
             Map<String, Object> expectedRow = new HashMap<>();
-            expectedRow.put("originalprop.prop", "Goon IV");
-            expectedRow.put("part.part", "shoulder");
+            expectedRow.put("originalprop.prop", "Goon II");
+            expectedRow.put("part.part", "skirt");
             expectedRow.put("episode_count", 12L);
             assertThat(result).containsOnly(expectedRow);
         }

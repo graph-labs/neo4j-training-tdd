@@ -9,7 +9,6 @@ import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class _6_CypherSubQueryTest extends GraphTests {
 
@@ -21,8 +20,10 @@ public class _6_CypherSubQueryTest extends GraphTests {
     @Test
     public void should_aggregate_and_sort_companions_alphabetically() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should sort the companions alphabetically");
+            String cql = "MATCH (c:Character)-[:COMPANION_OF]->(:Character {character:'Doctor'}) " +
+                    "WITH c " +
+                    "ORDER BY c.character " +
+                    "RETURN COLLECT(c.character) AS characters";
 
             Result result = graphDb.execute(cql);
 
@@ -83,8 +84,11 @@ public class _6_CypherSubQueryTest extends GraphTests {
     @Test
     public void should_find_the_popular_companions_who_appeared_more_than_twenty_times() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the most popular companions");
+            String cql =
+                    "MATCH (:Episode)<-[a:APPEARED_IN]-(c:Character)-[:COMPANION_OF]->(:Character {character:'Doctor'}) " +
+                    "WITH COLLECT(a) AS episodes, c.character AS companions " +
+                    "WHERE LENGTH(episodes) > 20 " +
+                    "RETURN companions";
 
             Result result = graphDb.execute(cql);
 
