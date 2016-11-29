@@ -22,13 +22,12 @@ import org.neo4j.graphdb.schema.Schema;
 import org.neo4j.kernel.api.exceptions.schema.UniquePropertyValueValidationException;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.hamcrest.core.Is.isA;
 
 public class _1_IndexingTest extends GraphTests {
@@ -44,14 +43,13 @@ public class _1_IndexingTest extends GraphTests {
     @Test
     public void should_index_existing_characters_by_name() {
         try (Transaction transaction = graphDb.beginTx()) {
-            Index<Node> index = null /* TODO: create the index for Character nodes */;
-            Iterator<Node> characters = Collections.<Node>emptyList().iterator() /* TODO: find all nodes with the label */;
+            Index<Node> index = graphDb.index().forNodes("characters");
+            Iterator<Node> characters = graphDb.findNodes(Label.label("Character"));
             while (characters.hasNext()) {
                 Node character = characters.next();
-                /*TODO: index the node*/
+                index.add(character, "indexed_name", character.getProperty("name"));
             }
 
-            fail("You should index the node with the legacy index manager");
             transaction.success();
         }
 
@@ -75,13 +73,13 @@ public class _1_IndexingTest extends GraphTests {
     @Test
     public void should_automatically_index_names_in_upper_case() {
         try (Transaction transaction = graphDb.beginTx()) {
-            /*
-             * TODO:
-             *  - get the auto-indexer for nodes
-             *  - auto-index name properties in upper case
-             */
-
-            fail("You should auto-index all names");
+            AutoIndexer<Node> nodeAutoIndexer = graphDb.index().getNodeAutoIndexer();
+            nodeAutoIndexer.setEnabled(true);
+            nodeAutoIndexer.startAutoIndexingProperty("name");
+            graphDb.findNodes(Label.label("Character"))
+                .forEachRemaining(node -> {
+                    node.setProperty("name", node.getProperty("name").toString().toUpperCase(Locale.ENGLISH));
+                });
             transaction.success();
         }
 
@@ -102,8 +100,8 @@ public class _1_IndexingTest extends GraphTests {
     @Test
     public void should_create_index_for_character_names() {
         try (Transaction transaction = graphDb.beginTx()) {
-            // TODO: index character names with the Schema API
-            fail("You should index character names with the Schema API");
+            Schema schema = graphDb.schema();
+            schema.indexFor(Label.label("Character")).on("name").create();
             transaction.success();
         }
 
@@ -122,8 +120,9 @@ public class _1_IndexingTest extends GraphTests {
     @Test
     public void should_create_character_name_unicity_constraint() {
         try (Transaction transaction = graphDb.beginTx()) {
-            //TODO: define unicity constraint on character names
-            fail("You should define a unicity constraint on character names");
+            graphDb.schema().constraintFor(Label.label("Character"))
+                .assertPropertyIsUnique("name")
+                .create();
             transaction.success();
         }
 
