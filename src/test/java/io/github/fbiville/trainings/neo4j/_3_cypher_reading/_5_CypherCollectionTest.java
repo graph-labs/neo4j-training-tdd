@@ -22,8 +22,9 @@ public class _5_CypherCollectionTest extends GraphTests {
     @Test
     public void should_extract_the_first_five_episode_titles() {
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find the first five episode titles");
+            String cql =
+                    "MATCH p=(e:Episode {episode:'1'})-[:NEXT*4..4]->(:Episode)" +
+                    "RETURN EXTRACT(e in nodes(p) | e.title) AS episodes";
 
             Result result = graphDb.execute(cql);
 

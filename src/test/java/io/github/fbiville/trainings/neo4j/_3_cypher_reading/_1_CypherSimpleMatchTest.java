@@ -32,8 +32,7 @@ public class _1_CypherSimpleMatchTest extends GraphTests {
          * 218a and 218b as their episode numbers seemingly just to be difficult!
          */
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find all Doctor Who episodes");
+            String cql = "MATCH (e:Episode) RETURN e";
 
             try (Result result = graphDb.execute(cql)) {
                 assertThat(IteratorOperations.size(result)).isEqualTo(246);
@@ -45,8 +44,7 @@ public class _1_CypherSimpleMatchTest extends GraphTests {
     public void should_find_all_the_episodes_in_which_the_cybermen_appeared() {
         //HINT: there is a direct relation between Species and Episode ;)
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find all Doctor Who episodes in which the Cybermen appeared");
+            String cql = "MATCH (:Species {species:'Cyberman'})-[:APPEARED_IN]->(episode:Episode) RETURN episode";
 
             ResourceIterator<Node> result = graphDb.execute(cql).columnAs("episode");
 
@@ -79,8 +77,8 @@ public class _1_CypherSimpleMatchTest extends GraphTests {
         // HINT: Dalek is a species
 
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find all episodes where Tennant and Rose fought the Daleks");
+            String cql = "MATCH (:Character {character:'Rose Tyler'})-[:APPEARED_IN]->(e:Episode)<-[:APPEARED_IN]-(:Actor {actor:'David Tennant'})," +
+                    "   (:Species {species:'Dalek'})-[:APPEARED_IN]->(e) RETURN e AS episode";
 
             Iterator<Node> result = graphDb.execute(cql).columnAs("episode");
 
@@ -101,8 +99,9 @@ public class _1_CypherSimpleMatchTest extends GraphTests {
     public void should_return_any_wikipedia_entries_for_companions() {
         // HINT: COMPANION_OF whom? of Character "Doctor"!
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find all wikipedia entries of the companions");
+            String cql = "MATCH (companion:Character)-[:COMPANION_OF]->(:Character {character:'Doctor'}) " +
+                    "WHERE EXISTS(companion.wikipedia) " +
+                    "RETURN companion.wikipedia";
 
             Iterator<String> result = graphDb.execute(cql).columnAs("companion.wikipedia");
 
@@ -120,8 +119,7 @@ public class _1_CypherSimpleMatchTest extends GraphTests {
     public void should_find_individual_companions_and_enemies_of_the_doctor() {
         // hint: *individual*
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should find all individual companions and enemies of the doctor");
+            String cql = "MATCH (c:Character)-[:ENEMY_OF|:COMPANION_OF]->(:Character {character:'Doctor'}) RETURN COUNT(c) AS count";
 
             Iterator<Long> result = graphDb.execute(cql).columnAs("count");
 

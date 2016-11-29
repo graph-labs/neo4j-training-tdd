@@ -29,8 +29,9 @@ public class _2_CypherOptionalMatchTest extends GraphTests {
     public void should_return_the_characters_and_the_things_they_may_own() throws Exception {
         // HINT: characters may not own anything
         try (Transaction ignored = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should fetch characters and the things they own");
+            String cql = "MATCH (character:Character) " +
+                    "OPTIONAL MATCH (character)-[:OWNS]->(thing:Thing) " +
+                    "RETURN character.character AS character, thing.thing AS thing";
 
             var result = asTuples(graphDb.execute(cql), "character", "thing");
 
