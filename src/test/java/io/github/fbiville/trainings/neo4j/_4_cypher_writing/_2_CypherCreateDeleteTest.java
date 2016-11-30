@@ -25,8 +25,7 @@ public class _2_CypherCreateDeleteTest extends GraphTests {
     @Test
     public void should_create_a_single_node() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should create a simple node with Cypher");
+            String cql = "CREATE (n)";
             graphDb.execute(cql);
             transaction.success();
         }
@@ -44,8 +43,7 @@ public class _2_CypherCreateDeleteTest extends GraphTests {
     @Test
     public void should_create_a_single_node_with_some_properties() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should create a node with some properties");
+            String cql = "CREATE (:Actor {firstname:'Tom', lastname:'Baker'})";
 
             graphDb.execute(cql);
             transaction.success();
@@ -67,8 +65,7 @@ public class _2_CypherCreateDeleteTest extends GraphTests {
     @Test
     public void should_create_a_simple_connected_graph() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should create a simple connected graph");
+            String cql = "CREATE (:Character {character:'Doctor'})<-[:ENEMY_OF]-(:Character {character:'Master'})";
 
             graphDb.execute(cql);
             transaction.success();
