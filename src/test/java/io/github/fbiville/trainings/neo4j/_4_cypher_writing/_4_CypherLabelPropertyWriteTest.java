@@ -10,7 +10,6 @@ import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class _4_CypherLabelPropertyWriteTest extends GraphTests {
 
@@ -22,8 +21,7 @@ public class _4_CypherLabelPropertyWriteTest extends GraphTests {
     @Test
     public void should_add_original_name_property_for_david_tennant_node() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should add the property to David Tennant node");
+            String cql = "MATCH (a:Actor {actor: 'David Tennant'}) SET a.original_name = 'David McDonald'";
 
             graphDb.execute(cql);
             transaction.success();
@@ -40,8 +38,7 @@ public class _4_CypherLabelPropertyWriteTest extends GraphTests {
         should_add_original_name_property_for_david_tennant_node();
 
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should change the property to David Tennant node");
+            String cql = "MATCH (a:Actor {actor: 'David Tennant'}) SET a.original_name = 'Ronald McDonald'";
 
             graphDb.execute(cql);
             transaction.success();
@@ -56,8 +53,7 @@ public class _4_CypherLabelPropertyWriteTest extends GraphTests {
     @Test
     public void should_add_scottish_nationality_label_to_the_existing_david_tennant_node() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should add the label to David Tennant node");
+            String cql = "MATCH (a:Actor {actor: 'David Tennant'}) SET a:Scottish";
 
             graphDb.execute(cql);
             transaction.success();
@@ -72,8 +68,7 @@ public class _4_CypherLabelPropertyWriteTest extends GraphTests {
     @Test
     public void should_add_actor_male_and_scottish_labels_to_the_existing_david_tennant_node() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should add the labels to David Tennant node");
+            String cql = "MATCH (a:Actor {actor: 'David Tennant'}) SET a:Scottish:Male";
 
             graphDb.execute(cql);
             transaction.success();
@@ -88,8 +83,7 @@ public class _4_CypherLabelPropertyWriteTest extends GraphTests {
     @Test
     public void should_visit_all_nodes_and_relationships() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should visit all nodes and relationships");
+            String cql = "MATCH (n) OPTIONAL MATCH (n)-[r]->() SET n.visited = true, r.visited = true";
 
             graphDb.execute(cql);
             transaction.success();
@@ -106,8 +100,8 @@ public class _4_CypherLabelPropertyWriteTest extends GraphTests {
     @Test
     public void should_remove_salary_data_from_doctor_actors() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should remove the salaries of Doctor Who actors");
+            String cql = "MATCH (:Character {character: 'Doctor'})<-[:PLAYED]-(actor:Character) " +
+                    "REMOVE actor.salary";
             
             graphDb.execute(cql);
             transaction.success();
@@ -123,8 +117,10 @@ public class _4_CypherLabelPropertyWriteTest extends GraphTests {
     @Test
     public void should_add_story_arc_on_relationships_between_episodes() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should add the story arc between 'The Ribos Operation' and 'The Armageddon Factor' episodes");
+            String cql = "MATCH p=(startEp:Episode {title: 'The Ribos Operation'})-[:NEXT*]->" +
+                    "(endEp:Episode {title: 'The Armageddon Factor'})\n";
+
+            cql += "FOREACH (r in relationships(p) | SET r.story_arc = 'The Key to Time')";;
 
             graphDb.execute(cql);
             transaction.success();

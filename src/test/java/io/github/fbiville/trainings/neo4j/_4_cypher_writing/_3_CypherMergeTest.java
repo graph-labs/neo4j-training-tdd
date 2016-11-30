@@ -26,8 +26,10 @@ public class _3_CypherMergeTest extends GraphTests {
     public void should_bring_actors_Karen_Gillan_and_Caitlin_Blackwood_into_the_Amy_Pond_subgraph() {
         // Hint: Amy Pond is definitely in the graph, and the actors may be too. How can MERGE help?
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should add Karen Gillan and Caitlin Blackwood to Amy Pond character graph");
+            String cql =
+                    "MATCH (amy:Character {character: 'Amy Pond'}) " +
+                    "MERGE (amy)<-[:PLAYED]-(:Actor {actor: 'Karen Gillan'}) " +
+                    "MERGE (amy)<-[:PLAYED]-(:Actor {actor: 'Caitlin Blackwood'})";
 
             graphDb.execute(cql);
             transaction.success();
@@ -47,8 +49,11 @@ public class _3_CypherMergeTest extends GraphTests {
     public void should_make_sure_Amy_Pond_and_Rory_Williams_are_in_love() {
         // Hint: love must go both ways ;-D
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should make Amy Pond and Rory Williams are in love");
+            String cql =
+                "MERGE (amy:Character {character: 'Amy Pond'}) " +
+                "MERGE (rory:Character {character: 'Rory Williams'}) " +
+                "MERGE (amy)<-[:LOVES]-(rory) " +
+                "MERGE (amy)-[:LOVES]->(rory)";
 
             graphDb.execute(cql);
             transaction.success();
@@ -66,8 +71,9 @@ public class _3_CypherMergeTest extends GraphTests {
     public void should_demarcate_years_when_Amy_Pond_was_a_companion_of_the_doctor() {
         // Hint: you should set the dates only if it matches
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should set the years of companionship of Amy Pond with Doctor Who");
+            String cql =
+                    "MERGE (:Character {character: 'Amy Pond'})-[c:COMPANION_OF]->(:Character {character: 'Doctor'})" +
+                    "ON MATCH SET c.start = 2010, c.end = 2013";
 
             graphDb.execute(cql);
             transaction.success();

@@ -28,8 +28,7 @@ public class _1_CypherIndexConstraintTest extends GraphTests {
     @Test
     public void should_create_an_index_of_species_with_Cypher() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should write an index for species");
+            String cql = "CREATE INDEX ON :Species(species)";
 
             graphDb.execute(cql);
             transaction.success();
@@ -51,8 +50,7 @@ public class _1_CypherIndexConstraintTest extends GraphTests {
         should_create_an_index_of_species_with_Cypher();
 
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should delete the index for species");
+            String cql = "DROP INDEX ON :Species(species)";
 
             graphDb.execute(cql);
             transaction.success();
@@ -67,8 +65,7 @@ public class _1_CypherIndexConstraintTest extends GraphTests {
     @Test/* Acting trivia: American and British actors' unions demand that no two actors have the same name! */
     public void should_disallow_duplicate_actor_creation() {
         try (Transaction transaction = graphDb.beginTx()) {
-            String cql = null /*TODO: write Cypher query*/;
-            fail("You should disallow duplicate actor creation");
+            String cql = "CREATE CONSTRAINT ON (actor:Actor) ASSERT actor.actor IS UNIQUE";
 
             graphDb.execute(cql);
             transaction.success();
