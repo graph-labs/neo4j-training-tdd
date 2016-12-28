@@ -1,9 +1,16 @@
 ---
 layout: page
-title: Cypher Writes
+title: Cypher (W)
 permalink: /cypher-writes/
 order: 50
 ---
+
+## Git
+
+```shell
+➜ ~ cd neo4j-training
+➜ ~ git checkout -f cypher_write
+```
 
 ## Structure
 
@@ -16,4 +23,5 @@ Cette série est divisée en quatre sections :
 
 ## Contexte
 
-Voir les explications de la [série d'exercices précédente](../cypher-reads/) sur Doctor Who.
+Voir les explications de la [série d'exercices précédente](../cypher-reads/) sur Doctor Who et comment importer les données
+du graphe requises pour l'exercice.

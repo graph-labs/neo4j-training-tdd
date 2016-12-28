@@ -5,6 +5,15 @@ permalink: /bolt/
 order: 70
 ---
 
+## Git
+
+```shell
+➜ ~ cd neo4j-training
+➜ ~ git checkout -f bolt
+```
+
+## Structure
+
 À l'instar de la série d'exercice sur les API REST, cette série d'exercices sur Bolt 
 va dépendre de l'instance Neo4j que vous avez installée sur votre machine. 
 Par conséquent, il est nécessaire d'importer les données Doctor Who afin que les tests 

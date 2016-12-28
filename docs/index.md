@@ -3,6 +3,10 @@ layout: page
 title: Introduction à Neo4j
 ---
 
+## Pré-requis
+
+Merci de vous référer à la [section dédiée](./setup/). 
+
 ## Structure des exercices
 
 Les exercices sont regroupés par thème. Ils suivent l'ordre des slides de la formation.
@@ -55,11 +59,13 @@ Pour exécuter les tests, vous avez le choix:
 
 ## Conseils
 
-N'hésitez pas à former des binômes et à vous entraider !
+N'hésitez pas à travailler en binôme si vous le pouvez et à vous entraider !
 
-Ne restez pas bloqués plus de 2 minutes, le formateur est là
-pour vous aider. Il n'y a pas de questions stupides, il n'y a 
-que des questions que personne n'ose demander ;-)
+Si vous êtes bloqué sur un exercice :
+
+1. vous êtes chanceux et participez à la formation, le formateur est là pour vous aider
+1. vous n'êtes pas en formation, la meilleure solution est de contacter
+Florent Biville afin de pouvoir rejoindre le [Gitter dédié](gitter.im/neo4j-developer-training) et d'y poser vos questions !
 
 Soyez curieux ! Explorez les API de Neo4j, elles vous donneront
 la réponse que vous cherchez. (L'autocomplétion de l'IDE aide beaucoup.)

@@ -5,6 +5,15 @@ permalink: /rest/
 order: 60
 ---
 
+## Git
+
+```shell
+➜ ~ cd neo4j-training
+➜ ~ git checkout -f rest
+```
+
+## Structure
+
 Cette série d'exercices va dépendre de l'instance Neo4j que vous avez installée
 sur votre machine. Par conséquent, il est nécessaire d'importer les données
 Doctor Who afin que les tests puissent s'exécuter et de laisser votre instance 
@@ -12,8 +21,8 @@ Neo4j active.
 
 ### Import
 
-Pour importer le graphe, veuillez vous référer à la section "Import" de la série
-["Cypher en lecture"](../cypher_reading/).
+{% include graph_import.md %}
+
 
 ### Authentification
 

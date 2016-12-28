@@ -1,9 +1,16 @@
 ---
 layout: page
-title: Cypher Reads
+title: Cypher (R)
 permalink: /cypher-reads/
 order: 40
 ---
+
+## Git
+
+```shell
+➜ ~ cd neo4j-training
+➜ ~ git checkout -f cypher_read
+```
 
 ## Structure
 
@@ -60,35 +67,11 @@ résumé pour les profanes, extrait de Wikipedia:
 > Ian Chesterton (William Russell). La seule histoire, dans l’ancienne série, où le 
 > Docteur voyage seul est The Deadly Assassin.
 
-N'hésitez pas à garder ouverte dans un onglet la 
-[**cheat sheet Cypher**](https://neo4j.com/docs/cypher-refcard/current/),
-qui indexe la plupart des opérations disponibles en Cypher.
-
-Ces exercices ne sont qu'une adaptation et remise à jour du 
-très bon tutorial ["Neo4j Koans"](https://github.com/jimwebber/neo4j-tutorial), créé par 
-[Jim Webber](https://twitter.com/jimwebber).
-
-
 ## Explorer le graph local
 
 ### Import
 
-Notez que l'exécution isolée d'un test peut prendre du temps car le 
-graphe complet est importé.
-
-Afin de pouvoir explorer le graphe facilement et tester vos requêtes 
-sans attendre ce chargement, il est **grandement** conseillé d'importer vos 
-données dans une base locale. Pour se faire, il suffit d'exécuter:
-
-```shell
-$> neo4j stop
-$> neo4j-shell -file src/test/resources/dr-who.cypher -path $NEO4J_HOME/data/databases/graph.db
-$> neo4j start
-```
-
-Notez que vous pouvez exécuter cette commande autant de fois que vous 
-voulez. Elle détruit le graphe Doctor Who et le recrée à chaque 
-exécution (vos autres données restent intactes).
+{% include graph_import.md %}
 
 ### Méta-graphe
 

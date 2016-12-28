@@ -5,6 +5,15 @@ permalink: /basics/
 order: 10
 ---
 
+## Git
+
+```shell
+➜ ~ cd neo4j-training
+➜ ~ git checkout -f core_api
+```
+
+## Structure
+
 L'idée est de se familiariser avec la structure des exercices et
 valider, au passage, votre installation locale de Git, Java et Maven.
 
@@ -16,5 +25,3 @@ Complétez la classe `BasicsTest`
 
 Comme indiqué [précédemment](../), lisez bien les commentaires
 et corrigez le code de façon la plus simple possible afin que les assertions soient vérifiées.
-
-Quand vous pensez avoir terminé l'exercice, appelez le formateur pour le lui prouver.

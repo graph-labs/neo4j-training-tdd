@@ -5,6 +5,15 @@ permalink: /traversal/
 order: 30
 ---
 
+## Git
+
+```shell
+➜ ~ cd neo4j-training
+➜ ~ git checkout -f traversal
+```
+
+## Structure
+
 Ce thème est divisé en deux parties:
 
  1. indexation

@@ -5,6 +5,15 @@ permalink: /core/
 order: 20
 ---
 
+## Git
+
+```shell
+➜ ~ cd neo4j-training
+➜ ~ git checkout -f core_api
+```
+
+## Structure
+
 Ce thème est divisé en quatre parties:
 
  1. écriture de noeuds
@@ -14,5 +23,3 @@ Ce thème est divisé en quatre parties:
  
 Chaque partie correspond à une classe dédiée, avec une série
 de tests à faire valider.
-
-Quand vous pensez avoir terminé l'exercice, appelez le formateur pour le lui prouver.
