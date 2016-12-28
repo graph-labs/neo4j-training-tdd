@@ -1,6 +1,7 @@
 ---
+layout: page
+title: Introduction à Neo4j
 ---
-# Formation Neo4j
 
 ## Structure des exercices
 
@@ -64,15 +65,4 @@ Soyez curieux ! Explorez les API de Neo4j, elles vous donneront
 la réponse que vous cherchez. (L'autocomplétion de l'IDE aide beaucoup.)
 
 Notez enfin que la solution la plus simple est souvent la meilleure ;-)
-
-## Énoncés
-
- 1. ["Échauffement"](./basics/)
- 1. ["API unitaires"](./core_api/)
- 1. ["Traversées"](./traversal/)
- 1. ["Cypher en lecture"](./cypher_reading/)
- 1. ["Cypher en écriture"](./cypher_writing/)
- 1. ["API REST"](./rest/)
- 1. ["Bolt"](./bolt/)
- 1. ["Extensions Neo4j"](./extensions/)
 

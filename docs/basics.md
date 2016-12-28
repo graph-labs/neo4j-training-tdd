@@ -1,18 +1,9 @@
 ---
+layout: page
+title: Test Basics
+permalink: /basics/
+order: 10
 ---
-# Formation Neo4j
-
-Retour à l'[accueil](..).
-
- 1. ["API unitaires"](../core_api/)
- 1. ["Traversées"](../traversal/)
- 1. ["Cypher en lecture"](../cypher_reading/)
- 1. ["Cypher en écriture"](../cypher_writing/)
- 1. ["API REST"](../rest/)
- 1. ["Bolt"](../bolt/)
- 1. ["Extensions Neo4j"](../extensions/)
-
-## Échauffement
 
 L'idée est de se familiariser avec la structure des exercices et
 valider, au passage, votre installation locale de Git, Java et Maven.

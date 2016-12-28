@@ -1,20 +1,11 @@
 ---
+layout: page
+title: Cypher Reads
+permalink: /cypher-reads/
+order: 40
 ---
-# Formation Neo4j
 
-Retour à l'[accueil](..).
-
- 1. ["Échauffement"](../basics/)
- 1. ["API unitaires"](../core_api/)
- 1. ["Traversées"](../traversal/)
- 1. ["Cypher en écriture"](../cypher_writing/)
- 1. ["API REST"](../rest/)
- 1. ["Bolt"](../bolt/)
- 1. ["Extensions Neo4j"](../extensions/)
- 
-## Cypher en lecture
-
-### Structure
+## Structure
 
 Cette série d'exercices se divise de la sorte :
 
@@ -25,7 +16,7 @@ Cette série d'exercices se divise de la sorte :
 1. utilisation des fonctions de collection
 1. utilisation de `WITH`
 
-### Doctor Who ? Doctor Who !
+## Doctor Who ? Doctor Who !
 
 Cette série d'exercices porte sur la série légendaire
 [Doctor Who](https://fr.wikipedia.org/wiki/Doctor_Who).
@@ -78,9 +69,9 @@ très bon tutorial ["Neo4j Koans"](https://github.com/jimwebber/neo4j-tutorial),
 [Jim Webber](https://twitter.com/jimwebber).
 
 
-### Explorer le graph local
+## Explorer le graph local
 
-#### Import
+### Import
 
 Notez que l'exécution isolée d'un test peut prendre du temps car le 
 graphe complet est importé.
@@ -99,7 +90,7 @@ Notez que vous pouvez exécuter cette commande autant de fois que vous
 voulez. Elle détruit le graphe Doctor Who et le recrée à chaque 
 exécution (vos autres données restent intactes).
 
-#### Méta-graphe
+### Méta-graphe
 
 Afin de visualiser le "méta-graphe", vous pouvez exécuter cette requête :
 ```
@@ -115,7 +106,7 @@ RETURN DISTINCT label1 AS first_node, rel_type AS connected_by, label2 AS second
 Cela vous permet de lister toutes les relations qui existent entre les
 différents labels du graphe.
 
-#### Zoom sur le méta-graphe
+### Zoom sur le méta-graphe
 
 Si vous êtes intéressé-e par un label en particulier, vous pouvez filter de la sorte (exemple
 avec le label **`Character`**) :
