@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProcedureTest extends GraphTests {
 
-    @Rule //TODO: complete CountEpisodes procedure class
+    @Rule
     public Neo4jRule rule = new Neo4jRule().withProcedure(CountEpisodes.class);
     private GraphDatabaseService graphDb;
 
