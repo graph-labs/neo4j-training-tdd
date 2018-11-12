@@ -1,8 +1,8 @@
-BEGIN
+:begin
 MATCH (n:DoctorWho) DETACH DELETE n;
-COMMIT
+:commit
 
-BEGIN
+:begin
 CREATE (_1:DoctorWho:Character {`character`:"Doctor"})
 CREATE (_2:DoctorWho:Species {`species`:"Timelord"})
 CREATE (_3:DoctorWho:Character {`character`:"Rose Tyler"})
@@ -3349,4 +3349,4 @@ CREATE (_1057)-[:`MEMBER_OF`]->(_1035)
 CREATE (_1058)-[:`ORIGINAL_PROP`]->(_1057)
 CREATE (_1059)-[:`ORIGINAL_PROP`]->(_1057);
 
-COMMIT
+:commit
