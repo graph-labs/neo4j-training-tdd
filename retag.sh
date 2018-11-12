@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -Eeuo pipefail
 
 commit_grep() {
     git --no-pager log --format='%H' --grep="$1"
@@ -11,8 +11,8 @@ echo    # (optional) move to a new line
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo 'Deleting tags'
-    git tag -l | xargs -n 1 git push --delete origin
-    git tag -l | xargs -n 1 git tag -d
+    git tag -l | xargs -n 1 git push --delete origin || true
+    git tag -l | xargs -n 1 git tag -d || true
 
     echo 'Recreating tags'
     git tag basics $(commit_grep 'warmup')
