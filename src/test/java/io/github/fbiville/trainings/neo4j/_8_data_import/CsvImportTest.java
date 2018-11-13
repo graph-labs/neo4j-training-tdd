@@ -15,7 +15,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class CsvImportTest {
 
@@ -28,8 +27,7 @@ public class CsvImportTest {
     @Test
     public void imports_word_graph_from_CSV() {
         String uri = serveCsv("example.csv", "hello,world\nbonjour,monde");
-        var cql = "LOAD CSV ???"; //TODO: import CSV from uri variable
-        fail("You should import each word as a node and link them");
+        var cql = "LOAD CSV FROM '" + uri + "' AS row CREATE (:Word {word: row[0]})-[:NEXT]->(:Word {word: row[1]})";
 
         try (Transaction transaction = graphDb.beginTx()) {
             graphDb.execute(cql);
@@ -52,8 +50,7 @@ public class CsvImportTest {
     @Test
     public void imports_word_graph_from_CSV_with_headers() {
         String uri = serveCsv("example.csv", "word1,word2\nhello,world\nbonjour,monde");
-        var cql = "LOAD CSV ???"; //TODO: import CSV from uri variable
-        fail("You should import each word as a node and link them");
+        var cql = "LOAD CSV WITH HEADERS FROM '" + uri + "' AS row CREATE (:Word {word: row.word1})-[:NEXT]->(:Word {word: row.word2})";
 
         try (Transaction transaction = graphDb.beginTx()) {
             graphDb.execute(cql);
@@ -76,8 +73,9 @@ public class CsvImportTest {
     @Test
     public void imports_word_graph_from_CSV_with_headers_and_custom_delimiter() {
         String uri = serveCsv("example.csv", "word1$word2\nhello$world\nbonjour$monde");
-        var cql = "LOAD CSV ???"; //TODO: import CSV from uri variable
-        fail("You should import each word as a node and link them");
+        var cql = "LOAD CSV WITH HEADERS FROM '" + uri + "' AS row " +
+                "FIELDTERMINATOR '$'" +
+                "CREATE (:Word {word: row.word1})-[:NEXT]->(:Word {word: row.word2})";
 
         try (Transaction transaction = graphDb.beginTx()) {
             graphDb.execute(cql);
