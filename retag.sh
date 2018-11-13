@@ -23,6 +23,7 @@ then
     git tag rest $(commit_grep 'REST API')
     git tag bolt $(commit_grep 'Bolt')
     git tag extension $(commit_grep 'extension')
+    git tag csv $(commit_grep 'LOAD CSV')
 
     echo 'Pushing tags'
     git push --tags

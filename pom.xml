@@ -17,6 +17,18 @@
     <neo4j.version>3.5.12</neo4j.version>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency><!-- required by Neo4j testing utilities & wiremock -->
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-bom</artifactId>
+        <version>9.4.17.v20190418</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.neo4j</groupId>
@@ -60,6 +72,18 @@
       <groupId>org.neo4j.test</groupId>
       <artifactId>neo4j-harness</artifactId>
       <version>${neo4j.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.github.tomakehurst</groupId>
+      <artifactId>wiremock</artifactId>
+      <version>2.19.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>1.7.12</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
