@@ -1,0 +1,35 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: org.neo4j.driver:neo4j-java-driver
+    versions:
+    - 4.2.0
+    - 4.2.1
+    - 4.2.2
+    - 4.2.3
+    - 4.2.4
+  - dependency-name: org.neo4j.test:neo4j-harness
+    versions:
+    - 4.2.3
+    - 4.2.4
+  - dependency-name: org.neo4j.community:it-test-support
+    versions:
+    - 4.2.3
+    - 4.2.4
+  - dependency-name: org.neo4j:neo4j
+    versions:
+    - 4.2.3
+    - 4.2.4
+  - dependency-name: org.eclipse.jetty:jetty-bom
+    versions:
+    - 11.0.0
+    - 11.0.1
+  - dependency-name: com.squareup.okhttp3:okhttp
+    versions:
+    - 4.9.0
